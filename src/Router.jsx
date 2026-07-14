@@ -1,0 +1,23 @@
+import { createBrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import Home from "./pages/Home.jsx";
+import NotFound from "./pages/NotFound.jsx";
+
+const Router = createBrowserRouter([
+    {
+        path: "/",
+        element: <App />,
+        children:[
+            {
+                index: true,
+                element: <Home />
+            }
+        ]
+    },
+    {
+        path:"*",
+        element:<NotFound />
+    }
+]);
+
+export default Router
