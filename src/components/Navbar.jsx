@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import logo from "../assets/profit.png";
-import { Link } from "react-router-dom";
+import SignupModal from "./Signup.jsx";
+import SigninModal from "./Signin.jsx";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openSignup, setOpenSignup] = useState(false);
+  const [openSignin, setOpenSignin] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white shadow-md">
+    <>
+    <nav className={`${openSignup || openSignin?'static':"sticky top-0 z-50"} w-full bg-white shadow-md`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
 
@@ -25,13 +29,17 @@ const Navbar = () => {
 
           <div className="hidden lg:flex items-center gap-4">
 
-            <Link to="/" className="rounded-lg px-5 py-2.5 text-gray-700 font-medium transition duration-300 hover:text-black cursor-pointer">
+            <button 
+            onClick={()=>{setOpenSignup(false); setOpenSignin(true);}}
+            className="rounded-lg px-5 py-2.5 text-gray-700 font-medium transition duration-300 hover:text-black cursor-pointer">
               Sign In
-            </Link>
+            </button>
 
-            <Link to="/signup" className="rounded-lg border-2 border-gray-900 px-5 py-2.5 font-medium text-gray-900 transition duration-300 hover:bg-gray-900 hover:text-white cursor-pointer" >
+            <button 
+              onClick={()=>{setOpenSignin(false); setOpenSignup(true);}}
+            className="rounded-lg border-2 border-gray-900 px-5 py-2.5 font-medium text-gray-900 transition duration-300 hover:bg-gray-900 hover:text-white cursor-pointer" >
               Sign Up
-            </Link>
+            </button>
 
           </div>
 
@@ -67,6 +75,17 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    <SignupModal 
+        isOpen={openSignup}
+        onClose={()=>{ setOpenSignup(false)}}
+        onSigninClick={()=>{setOpenSignup(false); setOpenSignin(true)}}
+    />
+    <SigninModal
+      isOpen={openSignin}
+      onClose={()=>{setOpenSignin(false)}}
+      onSignupClick={()=>{setOpenSignin(false); setOpenSignup(true)}}
+    />
+    </>
   );
 };
 

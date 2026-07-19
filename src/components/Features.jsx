@@ -1,12 +1,12 @@
 import {
-  FiDollarSign,
   FiPieChart,
   FiShield,
 } from "react-icons/fi";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 
 const features = [
   {
-    icon: <FiDollarSign size={32} />,
+    icon: <FaIndianRupeeSign size={32} />,
     title: "Track Income",
     description:
       "Record every source of income and stay updated with your earnings in one organized place.",
